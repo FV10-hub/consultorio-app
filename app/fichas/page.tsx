@@ -15,7 +15,7 @@ export default async function FichadPage() {
     <>
       
       <div className="p-2">
-      <h1 className="text-4xl text-center font-black">Dashboard</h1>
+      <h1 className="text-4xl text-center font-black">Ficha de Pacientes</h1>
         <table className="w-full mt-5 table-auto">
           <thead className="bg-slate-800 text-white">
             <tr>

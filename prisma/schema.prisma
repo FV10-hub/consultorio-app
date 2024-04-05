@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Persona {
+  id                Int        @id @default(autoincrement())
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  nombre_completo   String?
+  documento         String     @unique
+  email             String     @unique
+  password          String?    
+  esDoctor          Boolean    @default(false)
+  esUsuario         Boolean    @default(false)
+  esPaciente        Boolean    @default(false)
+  ficha             Ficha[]
+}
+
+model Especialidades {
+  id                Int        @id @default(autoincrement())
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  descripcion       String?
+  codigo            String?
+}
+
+model Ficha {
+  id                Int        @id @default(autoincrement())
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  hora_consulta     String?
+  observacion       String?
+  indicacion        String?
+  receta            String?
+  asistio           Boolean    @default(false)
+  personaId         Int        @unique
+  persona           Persona    @relation(fields: [personaId], references: [id])
+
+}
+
+model Animal {
+  id                Int @id @default(autoincrement())
+  nombre_completo   String?
+}
