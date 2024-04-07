@@ -1,6 +1,7 @@
 "use client";
 import ContentMenu from "../ui/ContentMenu";
 import { useParams } from "next/navigation";
+import Logo from "../ui/Logo";
 
 function getMenus() {
   return [
@@ -43,6 +44,7 @@ export default function Sidebar() {
   console.log(parametro);
   return (
     <aside className="md:w-72 md:h-screen bg-white">
+      <Logo />
       <nav className="mt-10">
         {menus.map((menu) => (
           <ContentMenu key={menu.id} menu={menu} />
