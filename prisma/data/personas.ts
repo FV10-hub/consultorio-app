@@ -252,7 +252,7 @@ export const personas = [
     },
     {
       nombre_completo: "Carlos Jiménez",
-      documento: "897531246",
+      documento: "8975312469",
       email: "carlos.jimenez@correo.com",
       password: "clave468",
       esDoctor: true,
