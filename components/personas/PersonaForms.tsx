@@ -1,6 +1,11 @@
+import { Persona } from "@prisma/client";
 import ImageUpload from "./ImageUpload";
 
-export default async function PersonaForm() {
+
+type PersonaProps = {
+  persona?: Persona
+}
+export default async function PersonaForm({persona}: PersonaProps) {
     const nombreImagenSiVamosAGuardar = '';
   return (
     <>
@@ -17,6 +22,7 @@ export default async function PersonaForm() {
           name="nombre_completo"
           className="block w-full p-3 bg-slate-100"
           placeholder="Nombre Completo"
+          defaultValue={persona?.nombre_completo || ''}
         />
       </div>
       <div className="mb-4">
@@ -32,6 +38,7 @@ export default async function PersonaForm() {
           name="documento"
           className="block w-full p-3 bg-slate-100"
           placeholder="Documento"
+          defaultValue={persona?.documento || ''}
         />
       </div>
       <div className="mb-4">
@@ -47,6 +54,7 @@ export default async function PersonaForm() {
           name="email"
           className="block w-full p-3 bg-slate-100"
           placeholder="Correo"
+          defaultValue={persona?.email || ''}
         />
       </div>
       <div className="mb-4">
@@ -61,6 +69,7 @@ export default async function PersonaForm() {
           id="esDoctor"
           name="esDoctor"
           className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+          defaultChecked={persona?.esDoctor || false}
         />
       </div>
       <div className="mb-4">
@@ -75,6 +84,7 @@ export default async function PersonaForm() {
           id="esPaciente"
           name="esPaciente"
           className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+          defaultChecked={persona?.esPaciente || false}
         />
       </div>
       <ImageUpload  

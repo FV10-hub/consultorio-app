@@ -3,6 +3,7 @@ import { createPersona } from "@/actions/create-persona-action";
 import { PersonaSchema } from "@/src/schema/schema";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { stringify } from "querystring";
 
 export default function AddPersona({
   children,
@@ -15,8 +16,11 @@ export default function AddPersona({
       nombre_completo: formData.get("nombre_completo"),
       documento: formData.get("documento"),
       email: formData.get("email"),
+      esDoctor: formData.get("esDoctor") !== null  ? true : false,
+      esPaciente: formData.get("esPaciente") !== null  ? true : false,
       //image: formData.get('image')
     };
+    
     const result = PersonaSchema.safeParse(data);
     if (!result.success) {
       result.error.issues.forEach((issue) => {

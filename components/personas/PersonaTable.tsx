@@ -1,5 +1,5 @@
 import React from 'react'
-import PersonaDetalle from '../ui/PersonaDetalle'
+import PersonaDetalle from './PersonaDetalle'
 import PersonaPagination from './PersonaPagination'
 import { Persona } from '@prisma/client'
 
