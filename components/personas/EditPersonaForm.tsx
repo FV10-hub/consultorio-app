@@ -63,18 +63,20 @@ export default function EditPersonaForm({
     <div className="bg-white mt-10 px-5 py-10 rounded-md shadow-md max-w-3xl mx-auto">
       <form className="space-y-5" action={handleSubmit}>
         {children}
-        <input
-          type="submit"
-          className="bg-indigo-600 hover:bg-indigo-800 text-white w-full mt-5 p-3 uppercase font-bold cursor-pointer"
-          value="Guardar Cambios"
-          onClick={() => setAction("guardar")}
-        />
-        <input
-          type="submit"
-          className="bg-indigo-600 hover:bg-indigo-800 text-white w-full mt-5 p-3 uppercase font-bold cursor-pointer"
-          value="Eliminar"
-          onClick={() => setAction("eliminar")}
-        />
+        <div className="flex flex-row justify-center">
+          <input
+            type="submit"
+            className="bg-cyan-500 hover:bg-cyan-600 text-white w-full rounded-md m-5 p-3 uppercase font-bold cursor-pointer"
+            value="Guardar Cambios"
+            onClick={() => setAction("guardar")}
+          />
+          <input
+            type="submit"
+            className="bg-red-500 hover:bg-red-600 text-white w-full rounded-md m-5 p-3 uppercase font-bold cursor-pointer"
+            value="Eliminar"
+            onClick={() => setAction("eliminar")}
+          />
+        </div>
       </form>
     </div>
   );

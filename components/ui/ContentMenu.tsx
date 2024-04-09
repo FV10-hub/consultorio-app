@@ -14,15 +14,16 @@ type menuProps = {
 
 export default function ContentMenu({ menu }: menuProps) {
   const pathname = usePathname();
-  console.log(pathname)
+  const isActive = pathname.startsWith(menu.path)
   return (
     <div
-      className={`${menu.path === pathname.replace("/", "") ? 'bg-amber-400' : ''} flex items-center gap-4 w-full border-t border-gray-200 p-3 last-of-type:border-b`}
+      className={`${isActive ? 'bg-cyan-500 hover:bg-cyan-600 text-white' : ''} 
+      flex items-center gap-4 w-full border-t border-gray-200 p-3 last-of-type:border-b`}
     >
       <div className="w-16 h-16 relative">
         <Image fill src={`${menu.imagen}.svg`} alt="Imagen" />
       </div>
-      <Link className="text-xl font-bold" href={`/${menu.path}`}>{menu.name}</Link>
+      <Link className="text-md font-bold" href={`/${menu.path}`}>{menu.name}</Link>
     </div>
   );
 }

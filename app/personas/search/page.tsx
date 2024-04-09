@@ -1,5 +1,6 @@
 import PersonaSearchForm from "@/components/personas/PersonaSearchForm"
 import PersonaTable from "@/components/personas/PersonaTable"
+import GoBackButton from "@/components/ui/GoBackButton"
 import Heading from "@/components/ui/Heading"
 import { prisma } from "@/src/lib/prisma"
 
@@ -21,7 +22,7 @@ export default async function SearchPage({ searchParams }: { searchParams: { sea
   return (
     <>
             <Heading>Resultados de búsqueda: {searchParams.search}</Heading>
-
+            <GoBackButton />
             <div className='flex flex-col lg:flex-row lg:justify-end gap-5'>
                 <PersonaSearchForm />
             </div>

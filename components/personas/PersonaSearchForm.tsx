@@ -23,14 +23,14 @@ export default function PersonaSearchForm() {
     <form action={handleSearchForm} className="flex items-center">
       <input
         type="text"
-        placeholder="Buscar Producto"
-        className="p-2 placeholder-gray-400 w-full"
+        placeholder="Buscar Persona"
+        className="p-2 placeholder-gray-400 w-full text-xs"
         name="search"
       />
 
       <input
         type="submit"
-        className="bg-indigo-600 p-2 uppercase text-white cursor-pointer"
+        className="bg-cyan-500 text-white text-xs p-2 cursor-pointer"
         value={"Buscar"}
       />
     </form>

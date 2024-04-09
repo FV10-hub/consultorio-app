@@ -43,7 +43,7 @@ export default async function PersonaPage({
       <div className="flex flex-col lg:flex-row lg:justify-between gap-5">
         <Link
           href={"/personas/nuevo"}
-          className="bg-amber-400 w-full lg:w-auto text-xl px-10 py-3 text-center font-bold cursor-pointer"
+          className="bg-cyan-500 text-white w-full rounded-lg lg:w-auto text-xs px-10 py-3 text-center font-bold cursor-pointer "
         >
           Crear Persona
         </Link>

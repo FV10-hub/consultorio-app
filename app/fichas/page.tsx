@@ -10,7 +10,6 @@ async function getPaicnetes(){
 
 export default async function FichadPage() {
   const pacientes = await getPaicnetes();
-  console.log(pacientes);
   return (
     <>
       

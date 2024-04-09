@@ -2,9 +2,9 @@ export const menus = [
     {
         id: 1,
         name: "Personas",
-        imagen: "persona",
+        imagen: "paciente",
         path: "personas"
-    },
+    }/*,
     {
         id: 2,
         name: "Pacientes",
@@ -22,9 +22,9 @@ export const menus = [
         name: "Especialidades",
         imagen: "especialidad",
         path: "especialidades"
-    },
+    }*/,
     {
-        id: 5,
+        id: 2,
         name: "Fichas",
         imagen: "ficha",
         path: "fichas"

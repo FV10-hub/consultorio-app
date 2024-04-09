@@ -16,7 +16,7 @@ export default function PersonaDetalle({ persona }: PersonaProps) {
                 <div className="flex gap-2 items-center">
                     <Link
                         href={`personas/${persona.id}/editar`}
-                        className='bg-indigo-600 text-white rounded-lg w-full p-2 uppercase font-bold text-xs text-center'
+                        className='bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg w-full p-2 uppercase font-bold text-xs text-center'
                     >Editar</Link>
                 </div>
             </td>

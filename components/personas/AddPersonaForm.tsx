@@ -31,7 +31,6 @@ export default function AddPersona({
 
     const response = await createPersona(result.data);
     if (response?.errors) {
-      console.log(response);
       response.errors.forEach((issue) => {
         toast.error(issue.message);
       });
@@ -48,7 +47,7 @@ export default function AddPersona({
         {children}
         <input
           type="submit"
-          className="bg-indigo-600 hover:bg-indigo-800 text-white w-full mt-5 p-3 uppercase font-bold cursor-pointer"
+          className="bg-cyan-500 hover:bg-cyan-600 text-white w-full mt-5 p-3 uppercase font-bold cursor-pointer"
           value="Registrar Persona"
         />
       </form>

@@ -3,14 +3,13 @@ import ContentMenu from "../ui/ContentMenu";
 import { useParams } from "next/navigation";
 import Logo from "../ui/Logo";
 
-function getMenus() {
-  return [
+const menus = [
     {
       id: 1,
       name: "Personas",
-      imagen: "persona",
-      path: "personas",
-    },
+      imagen: "paciente",
+      path: "/personas",
+    }/*,
     {
       id: 2,
       name: "Pacientes",
@@ -28,20 +27,16 @@ function getMenus() {
       name: "Especialidades",
       imagen: "especialidad",
       path: "especialidades",
-    },
+    }*/,
     {
-      id: 5,
+      id: 2,
       name: "Fichas",
       imagen: "ficha",
-      path: "fichas",
+      path: "/fichas",
     },
   ];
-}
 
 export default function Sidebar() {
-  const menus = getMenus();
-  const parametro = useParams<{ menu: string }>();
-  console.log(parametro);
   return (
     <aside className="md:w-72 md:h-screen bg-white">
       <Logo />
