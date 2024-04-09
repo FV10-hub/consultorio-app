@@ -1,4 +1,7 @@
+import ImageUpload from "./ImageUpload";
+
 export default async function PersonaForm() {
+    const nombreImagenSiVamosAGuardar = '';
   return (
     <>
       <div className="mb-4">
@@ -74,6 +77,9 @@ export default async function PersonaForm() {
           className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
         />
       </div>
+      <ImageUpload  
+                image={nombreImagenSiVamosAGuardar}
+            />
     </>
   );
 }
