@@ -40,3 +40,11 @@ export const PersonaSchema = z.object({
         .or(z.number().min(1, {message: 'La Categoría es Obligatoria' })),
     image: z.string().min(1, {message: 'La Imagen es obligatoria'})*/
 });
+
+export const EspecialidadSchema = z.object({
+  codigo: z.string().trim().min(1, { message: "El codigo no puede ir vacia" }),
+  descripcion: z
+    .string()
+    .trim()
+    .min(1, { message: "La descripcion no puede ir vacia" }),
+});

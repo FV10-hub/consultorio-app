@@ -23,7 +23,7 @@ export default function ContentMenu({ menu }: menuProps) {
       <div className="w-16 h-16 relative">
         <Image fill src={`${menu.imagen}.svg`} alt="Imagen" />
       </div>
-      <Link className="text-md font-bold" href={`/${menu.path}`}>{menu.name}</Link>
+      <Link className="text-md font-bold" href={`${menu.path}`}>{menu.name}</Link>
     </div>
   );
 }

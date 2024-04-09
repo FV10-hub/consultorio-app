@@ -21,15 +21,15 @@ const menus = [
       name: "Doctores",
       imagen: "doctor",
       path: "doctores",
-    },
-    {
-      id: 4,
-      name: "Especialidades",
-      imagen: "especialidad",
-      path: "especialidades",
     }*/,
     {
       id: 2,
+      name: "Especialidades",
+      imagen: "especialidad",
+      path: "/especialidades",
+    },
+    {
+      id: 3,
       name: "Fichas",
       imagen: "ficha",
       path: "/fichas",
