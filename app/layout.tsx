@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-gray-100`}>{children}</body>
+      <body data-theme="cupcake" className={`${inter.className} bg-gray-100`}>{children}</body>
     </html>
   );
 }

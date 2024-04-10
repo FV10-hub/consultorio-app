@@ -38,11 +38,11 @@ export default function AddFichaForm({
 
   return (
     <div className="">
-      <form className="space-y-5" action={handleSubmit}>
+      
      
         {children}
         
-      </form>
     </div>
+    
   );
 }

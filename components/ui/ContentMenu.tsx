@@ -21,7 +21,7 @@ export default function ContentMenu({ menu }: menuProps) {
       flex items-center gap-4 w-full border-t border-gray-200 p-3 last-of-type:border-b`}
     >
       <div className="w-16 h-16 relative">
-        <Image fill src={`${menu.imagen}.svg`} alt="Imagen" />
+        <Image fill src={`/${menu.imagen}.svg`} alt="Imagen" />
       </div>
       <Link className="text-md font-bold" href={`${menu.path}`}>{menu.name}</Link>
     </div>
