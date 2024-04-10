@@ -5,7 +5,6 @@ import { EspecialidadSchema } from "@/src/schema/schema";
 
 export async function createEspecialidad(data: unknown) {
   const result = EspecialidadSchema.safeParse(data);
-
   if (!result.success) {
     return {
       errors: result.error.issues,

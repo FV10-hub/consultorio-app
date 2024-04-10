@@ -18,7 +18,7 @@ model Persona {
   esDoctor          Boolean    @default(false)
   esUsuario         Boolean    @default(false)
   esPaciente        Boolean    @default(false)
-  ficha             Ficha[]
+  ficha             Ficha?
 }
 
 model Especialidades {
@@ -33,17 +33,21 @@ model Ficha {
   id                Int        @id @default(autoincrement())
   createdAt         DateTime   @default(now())
   updatedAt         DateTime   @updatedAt
+  personaId         Int        @unique
+  persona           Persona    @relation(fields: [personaId], references: [id])
+  consultas         Consulta[]
+}
+
+model Consulta {
+  id                Int        @id @default(autoincrement())
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
   hora_consulta     String?
   observacion       String?
   indicacion        String?
   receta            String?
   asistio           Boolean    @default(false)
-  personaId         Int        @unique
-  persona           Persona    @relation(fields: [personaId], references: [id])
+  fiha              Ficha      @relation(fields: [fichaId], references: [id])
+  fichaId           Int
 
-}
-
-model Animal {
-  id                Int @id @default(autoincrement())
-  nombre_completo   String?
 }

@@ -1,7 +1,6 @@
 "use client"
-import { createPersona } from "@/actions/create-persona-action";
 import { createEspecialidad } from "@/actions/especialidades/create-especialidad-action";
-import { EspecialidadSchema, PersonaSchema } from "@/src/schema/schema";
+import { EspecialidadSchema } from "@/src/schema/schema";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
@@ -14,10 +13,11 @@ export default function AddEspecialidadForm({
   const handleSubmit = async (formData: FormData) => {
     const data = {
       codigo: formData.get("codigo"),
-      documento: formData.get("descripcion"),
+      descripcion: formData.get("descripcion"),
     };
     
     const result = EspecialidadSchema.safeParse(data);
+    console.log(result);
     if (!result.success) {
       result.error.issues.forEach((issue) => {
         toast.error(issue.message);

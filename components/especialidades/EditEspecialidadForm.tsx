@@ -1,14 +1,11 @@
 "use client";
-import { createPersona } from "@/actions/create-persona-action";
-import { EspecialidadSchema, PersonaSchema } from "@/src/schema/schema";
-import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
-import { stringify } from "querystring";
-import { useParams } from "next/navigation";
-import { updatePersona } from "@/actions/update-persona-action";
-import { useState } from "react";
-import { deletePersona } from "@/actions/delete-persona-action";
+import { deletePersona } from "@/actions/personas/delete-persona-action";
+import { deleteEspecialidad } from "@/actions/especialidades/delete-especialidad-action";
 import { updateEspecialidad } from "@/actions/especialidades/update-especialidad-action";
+import { EspecialidadSchema } from "@/src/schema/schema";
+import { useParams, useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function EditEspecialidadForm({
   children,
@@ -24,8 +21,8 @@ export default function EditEspecialidadForm({
     var mensaje: string = "";
     if (action === "guardar") {
       const data = {
-        nombre_completo: formData.get("codigo"),
-        documento: formData.get("descripcion"),
+        codigo: formData.get("codigo"),
+        descripcion: formData.get("descripcion"),
       };
 
       const result = EspecialidadSchema.safeParse(data);
@@ -45,7 +42,7 @@ export default function EditEspecialidadForm({
       }
       mensaje = "Especialidad Creada correctamente";
     } else {
-      const response = await deletePersona(id);
+      const response = await deleteEspecialidad(id);
       if (response === null) {
         toast.error("No se pudo eliminar el registro");
         return;
@@ -53,7 +50,7 @@ export default function EditEspecialidadForm({
       mensaje = "Especialidad eliminada correctamente";
     }
     toast.success(mensaje);
-    router.push("/especialidad");
+    router.push("/especialidades");
   };
 
   return (

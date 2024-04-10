@@ -1,5 +1,5 @@
 "use client"
-import { createPersona } from "@/actions/create-persona-action";
+import { createPersona } from "@/actions/personas/create-persona-action";
 import { PersonaSchema } from "@/src/schema/schema";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";

@@ -1,8 +1,8 @@
 "use server"
 
-import { prisma } from "@/src/lib/prisma"
-import { EspecialidadSchema } from "@/src/schema/schema"
-import { revalidatePath } from "next/cache"
+import { prisma } from "@/src/lib/prisma";
+import { EspecialidadSchema } from "@/src/schema/schema";
+import { revalidatePath } from "next/cache";
 
 
 export async function updateEspecialidad(data: unknown, id: number) {
@@ -14,7 +14,7 @@ export async function updateEspecialidad(data: unknown, id: number) {
         }
     }
 
-    await prisma.persona.update({
+    await prisma.especialidades.update({
         where: {
             id
         },

@@ -1,3 +1,4 @@
+import EditEspecialidadForm from "@/components/especialidades/EditEspecialidadForm";
 import EspecialidadForm from "@/components/especialidades/EspecialidadForms";
 import EditPersonaForm from "@/components/personas/EditPersonaForm";
 import GoBackButton from "@/components/ui/GoBackButton";
@@ -30,9 +31,9 @@ export default async function EditarEspecialidad({
 
       <GoBackButton />
 
-      <EditPersonaForm>
+      <EditEspecialidadForm>
         <EspecialidadForm especialidad={especialidad} />
-      </EditPersonaForm>
+      </EditEspecialidadForm>
     </>
   );
 }

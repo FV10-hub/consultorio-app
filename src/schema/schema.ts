@@ -43,8 +43,5 @@ export const PersonaSchema = z.object({
 
 export const EspecialidadSchema = z.object({
   codigo: z.string().trim().min(1, { message: "El codigo no puede ir vacia" }),
-  descripcion: z
-    .string()
-    .trim()
-    .min(1, { message: "La descripcion no puede ir vacia" }),
+  descripcion: z.string().trim().min(1, { message: "La descripcion no puede ir vacia" }),
 });

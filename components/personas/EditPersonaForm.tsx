@@ -1,13 +1,13 @@
 "use client";
-import { createPersona } from "@/actions/create-persona-action";
+import { createPersona } from "@/actions/personas/create-persona-action";
 import { PersonaSchema } from "@/src/schema/schema";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { stringify } from "querystring";
 import { useParams } from "next/navigation";
-import { updatePersona } from "@/actions/update-persona-action";
+import { updatePersona } from "@/actions/personas/update-persona-action";
 import { useState } from "react";
-import { deletePersona } from "@/actions/delete-persona-action";
+import { deletePersona } from "@/actions/personas/delete-persona-action";
 
 export default function EditPersonaForm({
   children,

@@ -5,7 +5,7 @@ import { PersonaSchema } from "@/src/schema/schema"
 import { revalidatePath } from "next/cache"
 
 
-export async function deletePersona(id: number) {
+export async function deleteEspecialidad(id: number) {
     
     if(id <= 0) {
         return {
@@ -13,10 +13,10 @@ export async function deletePersona(id: number) {
         }
     }
 
-    await prisma.persona.delete({
+    await prisma.especialidades.delete({
         where: {
             id
         },
     })
-    revalidatePath('/personas')
+    revalidatePath('/especialidades')
 }

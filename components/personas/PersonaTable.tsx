@@ -36,9 +36,9 @@ export default function PersonaTable({ personas }: PersonasTableProps) {
                     </th>
                     <th
                       scope="col"
-                      className="relative py-3.5 pl-3 pr-4 sm:pr-0"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      <span className="sr-only">Acciones</span>
+                      <span>Acciones</span>
                     </th>
                   </tr>
                 </thead>
