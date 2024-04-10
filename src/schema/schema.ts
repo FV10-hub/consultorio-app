@@ -43,5 +43,26 @@ export const PersonaSchema = z.object({
 
 export const EspecialidadSchema = z.object({
   codigo: z.string().trim().min(1, { message: "El codigo no puede ir vacia" }),
-  descripcion: z.string().trim().min(1, { message: "La descripcion no puede ir vacia" }),
+  descripcion: z
+    .string()
+    .trim()
+    .min(1, { message: "La descripcion no puede ir vacia" }),
+});
+
+export const FichaSchema = z.object({
+  personaId: z
+    .string()
+    .trim()
+    .transform((value) => parseInt(value))
+    .refine((value) => value > 0, { message: "El paciente es Obligatorio" })
+    .or(z.number().min(1, { message: "El paciente es Obligatorio" })),
+  /*consultas: z.array(
+    z.object({
+      id: z.number(),
+      name: z.string(),
+      price: z.number(),
+      quantity: z.number(),
+      subtotal: z.number(),
+    })
+  ),*/
 });
