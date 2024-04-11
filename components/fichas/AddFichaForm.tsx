@@ -1,5 +1,5 @@
-"use client"
 import { FichaSchema } from "@/src/schema/schema";
+import { useStore } from "@/src/store";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
@@ -9,12 +9,13 @@ export default function AddFichaForm({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  
   const handleSubmit = async (formData: FormData) => {
     const data = {
       codigo: formData.get("codigo"),
       descripcion: formData.get("descripcion"),
     };
-    
+
     const result = FichaSchema.safeParse(data);
     console.log(result);
     if (!result.success) {
@@ -35,14 +36,11 @@ export default function AddFichaForm({
     toast.success("Ficha Creada correctamente");
     router.push("/fichas");
   };
-
+  
   return (
-    <div className="">
-      
-     
-        {children}
-        
-    </div>
     
+    <div className="">
+      <form className="space-y-5" action={handleSubmit}>{children}</form>
+    </div>
   );
 }

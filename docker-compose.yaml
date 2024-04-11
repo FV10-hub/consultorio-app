@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  todosDB:
+  consultorioDB:
     image: postgres:16
     container_name: consultorio-db
     restart: always
@@ -10,5 +10,6 @@ services:
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=manager
+      - POSTGRES_DB=consultorio
     volumes:
       - ./postgres:/var/lib/postgresql/data

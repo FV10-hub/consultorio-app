@@ -2,6 +2,7 @@ import { personas } from "./data/personas";
 import { especialidades } from "./data/especialidad";
 import { fichas } from "./data/ficha";
 import { PrismaClient } from "@prisma/client";
+import { consultas } from "./data/consultas";
 
 const prisma = new PrismaClient();
 
@@ -15,6 +16,9 @@ async function main() {
     });
     await prisma.ficha.createMany({
       data: fichas,
+    });
+    await prisma.consulta.createMany({
+      data: consultas,
     });
   } catch (error) {
     console.log(error);
