@@ -1,10 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillSave } from "react-icons/ai";
 import { IoAdd, IoSearch } from "react-icons/io5";
 import { PacientesModal } from "./PacientesModal";
 import { Persona } from "@prisma/client";
 import { useStore } from "@/src/store";
+import FichaAddConsulta from "./FichaAddConsulta";
 type FichaProps = {
   pacientes: Persona[];
   totalPacientes: number;
@@ -14,7 +15,6 @@ export default function FichaGenericForm({
   pacientes,
   totalPacientes,
 }: FichaProps) {
-  
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const pacientesForms = pacientes;
   const totalPacientesForms = totalPacientes;
@@ -23,8 +23,16 @@ export default function FichaGenericForm({
     agregarPacienteAFicha(persona);
   }
 
-  const agregarPacienteAFicha = useStore((state) => state.agregarPacienteAFicha)
-  const pacienteState = useStore((state) => state.pacienteState)
+  const agregarPacienteAFicha = useStore(
+    (state) => state.agregarPacienteAFicha
+  );
+  const pacienteState = useStore((state) => state.pacienteState);
+  const clearPacienteState = useStore((state) => state.clearPacienteState);
+  useEffect(() => {
+    clearPacienteState;
+  }, []);
+  const tipoSegurosList = Array.of("IPS", "PRIVADO", "NO TIENE");
+  const tipoSelect = "";
   return (
     <>
       <div className="border-b border-gray-900/10 pb-12 ">
@@ -66,9 +74,14 @@ export default function FichaGenericForm({
               autoComplete="off"
               className="w-96 p-3"
               placeholder="Buscar paciente"
-              defaultValue={pacienteState.nombre_completo || "nohay"}
+              defaultValue={pacienteState.nombre_completo || ""}
             />
-            <input type="hidden" name="personaId" id="personaId" defaultValue={pacienteState.id || 0}/>
+            <input
+              type="hidden"
+              name="personaId"
+              id="personaId"
+              defaultValue={pacienteState.id || 0}
+            />
             <button
               className="btn bg-cyan-500 hover:bg-cyan-600 text-white font-bold"
               onClick={() => setModalOpen(true)}
@@ -76,7 +89,31 @@ export default function FichaGenericForm({
               Buscar <IoSearch className="ml-2" size={18} />
             </button>
           </div>
+          <div className="mt-10 flex flex-row items-center">
+            <label
+              htmlFor="tipo_seguro"
+              className="text-gray-700 w-52 text-sm font-bold mb-2"
+            >
+              Tipo de Seguro
+            </label>
+            <div className="mt-2">
+              <select
+                className="w-52 p-3 bg-white"
+                id="tipo_seguro"
+                name="tipo_seguro"
+                defaultValue={tipoSelect}
+              >
+                <option value=""> -- Seleccione -- </option>
+                {tipoSegurosList.map((tipo) => (
+                  <option key={tipo} value={tipo}>
+                    {tipo}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
         </div>
+        <FichaAddConsulta />
         <PacientesModal
           personas={pacientesForms}
           modalOpen={modalOpen}

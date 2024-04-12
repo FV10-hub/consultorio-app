@@ -3,10 +3,12 @@ import { create } from "zustand";
 import { PersonaItem } from "./types";
 
 interface Store {
-  pacienteState: Persona
+  pacienteState: Persona;
   agregarPacienteAFicha: (persona: Persona) => void;
-  /*consultas: Consulta[];
-  openPacienteModal: (open: boolean) => void;
+  clearPacienteState: () => void;
+  addConsultasAFicha: (consulta: Consulta) => void;
+  consultasDeFicha: Consulta[];
+  /*openPacienteModal: (open: boolean) => void;
   openConsutltaModal: (open: boolean) => void;
   isPacienteModal: boolean;
   isConsutltaModal: boolean;
@@ -16,8 +18,38 @@ interface Store {
 export const useStore = create<Store>((set, get) => ({
   pacienteState: {} as Persona,
   agregarPacienteAFicha: (persona: Persona) => {
-    set(()=> ({
-      pacienteState: persona    
-    }))
+    set(() => ({
+      pacienteState: persona,
+    }));
   },
+  clearPacienteState: () => {
+    set(() => ({
+      pacienteState: {} as Persona,
+    }));
+  },
+  addConsultasAFicha: (consulta) => {
+    let consultas: Consulta[] = [];
+    //TODO: esto es para evitar duplicados descomentar si quieres validar
+    /*if (get().consultasDeFicha.find((item) => item.id === consulta.id)) {
+      consultas = get().consultasDeFicha.map((item) =>
+        item.id === consulta.id
+          ? {
+              ...item,
+            }
+          : item
+      );
+    } else {*/
+      consultas = [
+        ...get().consultasDeFicha,
+        {
+          ...consulta,
+        },
+      ];
+    //}
+    set(() => ({
+      consultasDeFicha: consultas,
+
+    }));
+  },
+  consultasDeFicha: [],
 }));
