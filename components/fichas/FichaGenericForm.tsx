@@ -87,7 +87,7 @@ export default function FichaGenericForm({
 
     toast.success('Se guardo')
     limpiarTodo();
-    router.push("/fichas");
+    router.push("/fichas?actualizar");
     
 }
 

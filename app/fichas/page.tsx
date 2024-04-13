@@ -23,13 +23,12 @@ async function getCountFichas() {
   return await prisma.ficha.count();
 }
 
-export default async function FichaPage({
-  searchParams,
-}: {
-  searchParams: { page: string };
+export default async function FichaPage({searchParams,}: {searchParams: { page: string, actualizar: string };
 }) {
   const page = +searchParams.page || 1;
+  const actualizar=searchParams.actualizar||null;
   const pageSize = 5;
+  if(actualizar !== null ) redirect("/fichas");
   if (page < 0) redirect("/fichas");
   const fichasData = getFichas(page, pageSize);
   const totalFichasData = getCountFichas();
