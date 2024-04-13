@@ -6,6 +6,10 @@ import { PacientesModal } from "./PacientesModal";
 import { Persona } from "@prisma/client";
 import { useStore } from "@/src/store";
 import FichaAddConsulta from "./FichaAddConsulta";
+import { useForm } from "@/src/hooks/useForm";
+import { toast } from "react-toastify";
+import { createFicha } from "@/actions/fichas/create-ficha-action";
+import { useRouter } from "next/navigation";
 type FichaProps = {
   pacientes: Persona[];
   totalPacientes: number;
@@ -15,29 +19,85 @@ export default function FichaGenericForm({
   pacientes,
   totalPacientes,
 }: FichaProps) {
+  //modal
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const pacientesForms = pacientes;
-  const totalPacientesForms = totalPacientes;
-  function getPersonaSelected(persona: Persona) {
-    console.log("persona sleccionada ", persona);
-    agregarPacienteAFicha(persona);
-  }
 
+  //estado
   const agregarPacienteAFicha = useStore(
     (state) => state.agregarPacienteAFicha
   );
   const pacienteState = useStore((state) => state.pacienteState);
   const clearPacienteState = useStore((state) => state.clearPacienteState);
+  const consultasDeFicha = useStore((state) => state.consultasDeFicha);
+  const limpiarTodo = useStore((state) => state.limpiarTodo);
+
+  //PROPS
+  const pacientesForms = pacientes;
+  const totalPacientesForms = totalPacientes;
+  function getPersonaSelected(persona: Persona) {
+    //TODO: agregar aca personaId si hay problemas
+    agregarPacienteAFicha(persona);
+    //TODO: mala practica
+    onIputChange({target: { name: "paciente_nombre", value: persona.nombre_completo }});
+  }
+
+  //LOCAL
+  const router = useRouter();
+  const tipoSegurosList = Array.of("IPS", "PRIVADO", "NO_TIENE");
+
+  const { formState, onResetForm, onIputChange } = useForm({
+    createdAt: new Date().toISOString().split("T")[0],
+    paciente_nombre: "",
+    tipo_seguro: "",
+    personaId: 0,
+  });
+
   useEffect(() => {
-    clearPacienteState;
+    clearPacienteState();
+    console.log("como esta ", pacienteState);
   }, []);
-  const tipoSegurosList = Array.of("IPS", "PRIVADO", "NO TIENE");
-  const tipoSelect = "";
+
+  const { createdAt, paciente_nombre, tipo_seguro, personaId } = formState;
+
+  //GUARDAR
+  const handleCrearFicha = async () => {
+    
+    const data = {
+      tipo_seguro: tipo_seguro, 
+      personaId: pacienteState.id,
+      consultas: consultasDeFicha.map(consulta => ({
+          hora_consulta: consulta.hora_consulta,
+          observacion: consulta.observacion,
+          indicacion: consulta.indicacion,
+          receta: consulta.receta,
+          asistio: consulta.asistio ? true : false 
+      }))
+  };
+    
+    if(data.personaId === null || data.personaId <= 0) {
+        toast.error("Debe seleccionar un Paciente");
+      return
+    }
+
+    const response = await createFicha(data)
+    if(!response) {
+        toast.error("No se Guardo")
+        return;
+    }
+
+    toast.success('Se guardo')
+    limpiarTodo();
+    router.push("/fichas");
+    
+}
+
   return (
     <>
       <div className="border-b border-gray-900/10 pb-12 ">
         <div className="flex flex-col lg:flex-row lg:justify-end gap-5">
-          <button className="btn bg-green-500 hover:bg-green-600 text-white">
+          <button 
+          onClick={handleCrearFicha}
+          className="btn bg-green-500 hover:bg-green-600 text-white">
             Guardar Ficha <AiFillSave className="ml-2" size={18} />
           </button>
         </div>
@@ -55,7 +115,7 @@ export default function FichaGenericForm({
                 name="createdAt"
                 id="createdAt"
                 className="w-52 p-3 bg-white"
-                value={new Date().toISOString().split("T")[0]}
+                value={createdAt}
                 disabled={true}
               />
             </div>
@@ -74,13 +134,8 @@ export default function FichaGenericForm({
               autoComplete="off"
               className="w-96 p-3"
               placeholder="Buscar paciente"
-              defaultValue={pacienteState.nombre_completo || ""}
-            />
-            <input
-              type="hidden"
-              name="personaId"
-              id="personaId"
-              defaultValue={pacienteState.id || 0}
+              value={paciente_nombre}
+              onChange={onIputChange}
             />
             <button
               className="btn bg-cyan-500 hover:bg-cyan-600 text-white font-bold"
@@ -101,7 +156,8 @@ export default function FichaGenericForm({
                 className="w-52 p-3 bg-white"
                 id="tipo_seguro"
                 name="tipo_seguro"
-                defaultValue={tipoSelect}
+                value={tipo_seguro}
+                onChange={onIputChange}
               >
                 <option value=""> -- Seleccione -- </option>
                 {tipoSegurosList.map((tipo) => (

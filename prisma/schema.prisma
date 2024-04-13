@@ -48,7 +48,7 @@ model Consulta {
   indicacion        String?
   receta            String?
   asistio           Boolean    @default(false)
-  fiha              Ficha      @relation(fields: [fichaId], references: [id])
+  ficha             Ficha      @relation(fields: [fichaId], references: [id])
   fichaId           Int
 
 }

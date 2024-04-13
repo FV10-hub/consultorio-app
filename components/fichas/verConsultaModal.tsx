@@ -19,8 +19,7 @@ export const VerModal: React.FC<ModalProps> = ({
     setFormState(consulta);
   }, [consulta]);
 
-  const { observacion } = formState;
-  console.log(observacion);
+  const { observacion, hora_consulta, indicacion, receta, asistio } = formState;
   return (
     <>
       <dialog id="paciente_modal" open={verOpen} className="modal">
@@ -33,6 +32,24 @@ export const VerModal: React.FC<ModalProps> = ({
               <div className="flex flex-col">
                 <div className="flex flex-row items-center mt-4">
                   <label
+                    htmlFor="hora_consulta"
+                    className="text-gray-700 w-52 text-sm font-bold mb-2"
+                  >
+                    Hora de la Consulta
+                  </label>
+                  <input
+                    type="time"
+                    name="hora_consulta"
+                    id="hora_consulta"
+                    defaultValue={hora_consulta || "no hay"}
+                    className="w-96 p-3 border-gray-300 rounded-md"
+                    placeholder="Escribe tus observaciones..."
+                  ></input>
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <div className="flex flex-row items-center mt-4">
+                  <label
                     htmlFor="observacion"
                     className="text-gray-700 w-52 text-sm font-bold mb-2"
                   >
@@ -42,10 +59,57 @@ export const VerModal: React.FC<ModalProps> = ({
                     name="observacion"
                     id="observacion"
                     rows={3}
-                    value={observacion || "no hay"}
+                    defaultValue={observacion || "no hay"}
                     className="w-96 p-3 border-gray-300 rounded-md"
                     placeholder="Escribe tus observaciones..."
                   ></textarea>
+                </div>
+                <div className="flex flex-row items-center mt-4">
+                  <label
+                    htmlFor="indicacion"
+                    className="text-gray-700 w-52 text-sm font-bold mb-2"
+                  >
+                    Indicaciones
+                  </label>
+                  <textarea
+                    name="indicacion"
+                    id="indicacion"
+                    rows={3}
+                    defaultValue={indicacion || "no hay"}
+                    className="w-96 p-3 border-gray-300 rounded-md"
+                    placeholder="Descripción de indicaciones..."
+                  ></textarea>
+                </div>
+                <div className="flex flex-row items-center mt-4">
+                  <label
+                    htmlFor="receta"
+                    className="text-gray-700 w-52 text-sm font-bold mb-2"
+                  >
+                    Receta
+                  </label>
+                  <textarea
+                    name="receta"
+                    id="receta"
+                    rows={3}
+                    defaultValue={receta || "no hay"}
+                    className="w-96 p-3 border-gray-300 rounded-md"
+                    placeholder="Detalles de la receta..."
+                  ></textarea>
+                </div>
+                <div className="flex flex-row items-center mt-4">
+                  <label
+                    htmlFor="asistio"
+                    className="text-gray-700 w-52 text-sm font-bold mb-2"
+                  >
+                    Asistió
+                  </label>
+                  <input
+                    type="checkbox"
+                    name="asistio"
+                    id="asistio"
+                    defaultChecked={asistio || false}
+                    className="ml-4 w-6 h-6"
+                  />
                 </div>
               </div>
             </form>

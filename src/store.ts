@@ -8,6 +8,7 @@ interface Store {
   clearPacienteState: () => void;
   addConsultasAFicha: (consulta: Consulta) => void;
   consultasDeFicha: Consulta[];
+  limpiarTodo: ()=> void;
   /*openPacienteModal: (open: boolean) => void;
   openConsutltaModal: (open: boolean) => void;
   isPacienteModal: boolean;
@@ -52,4 +53,11 @@ export const useStore = create<Store>((set, get) => ({
     }));
   },
   consultasDeFicha: [],
+  limpiarTodo: ()=>{
+    set(() => ({
+      consultasDeFicha: [],
+      pacienteState: {} as Persona,      
+
+    }));
+  }
 }));
