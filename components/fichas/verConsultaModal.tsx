@@ -1,5 +1,4 @@
 "use client";
-import { useForm } from "@/src/hooks/useForm";
 import { Consulta } from "@prisma/client";
 import { useEffect, useState } from "react";
 
@@ -14,18 +13,19 @@ export const VerModal: React.FC<ModalProps> = ({
   verOpen,
   setVerOpen,
 }) => {
+  
   const [formState, setFormState] = useState(consulta);
   useEffect(() => {
     setFormState(consulta);
   }, [consulta]);
-
+  
   const { observacion, hora_consulta, indicacion, receta, asistio } = formState;
   return (
     <>
       <dialog id="paciente_modal" open={verOpen} className="modal">
         <div className="bg-gray-400 p-5 w-auto rounded-md mt-2 mb-2">
           <div className="flex justify-between">
-            <label>Agrega la consulta del Paciente</label>
+            <label>Consulta del Paciente</label>
           </div>
           <div className="flex flex-col justify-start">
             <form id="consultaForm" className="space-y-6 p-8">
@@ -41,7 +41,8 @@ export const VerModal: React.FC<ModalProps> = ({
                     type="time"
                     name="hora_consulta"
                     id="hora_consulta"
-                    defaultValue={hora_consulta || "no hay"}
+                    value={hora_consulta || "00:00"}
+                    readOnly={true}
                     className="w-96 p-3 border-gray-300 rounded-md"
                     placeholder="Escribe tus observaciones..."
                   ></input>
@@ -59,7 +60,8 @@ export const VerModal: React.FC<ModalProps> = ({
                     name="observacion"
                     id="observacion"
                     rows={3}
-                    defaultValue={observacion || "no hay"}
+                    value={observacion || "no hay"}
+                    readOnly={true}
                     className="w-96 p-3 border-gray-300 rounded-md"
                     placeholder="Escribe tus observaciones..."
                   ></textarea>
@@ -75,7 +77,8 @@ export const VerModal: React.FC<ModalProps> = ({
                     name="indicacion"
                     id="indicacion"
                     rows={3}
-                    defaultValue={indicacion || "no hay"}
+                    value={indicacion || "no hay"}
+                    readOnly={true}
                     className="w-96 p-3 border-gray-300 rounded-md"
                     placeholder="Descripción de indicaciones..."
                   ></textarea>
@@ -91,7 +94,8 @@ export const VerModal: React.FC<ModalProps> = ({
                     name="receta"
                     id="receta"
                     rows={3}
-                    defaultValue={receta || "no hay"}
+                    value={receta || "no hay"}
+                    readOnly={true}
                     className="w-96 p-3 border-gray-300 rounded-md"
                     placeholder="Detalles de la receta..."
                   ></textarea>
@@ -107,7 +111,8 @@ export const VerModal: React.FC<ModalProps> = ({
                     type="checkbox"
                     name="asistio"
                     id="asistio"
-                    defaultChecked={asistio || false}
+                    checked={asistio || false}
+                    readOnly={true}
                     className="ml-4 w-6 h-6"
                   />
                 </div>

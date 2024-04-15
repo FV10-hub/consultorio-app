@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/src/lib/prisma";
+import { revalidatePath } from "next/cache";
 
 type FichaToCreate = {
     tipo_seguro?: string;
@@ -32,6 +33,7 @@ type FichaToCreate = {
           },
         },
       });
+      revalidatePath('/fichas')
       return true;
     } catch (error) {
       console.error("Error al crear la ficha:", error);

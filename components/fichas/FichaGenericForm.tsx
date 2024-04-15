@@ -54,7 +54,6 @@ export default function FichaGenericForm({
 
   useEffect(() => {
     clearPacienteState();
-    console.log("como esta ", pacienteState);
   }, []);
 
   const { createdAt, paciente_nombre, tipo_seguro, personaId } = formState;
@@ -87,7 +86,7 @@ export default function FichaGenericForm({
 
     toast.success('Se guardo')
     limpiarTodo();
-    router.push("/fichas?actualizar");
+    router.push("/fichas");
     
 }
 

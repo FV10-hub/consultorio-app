@@ -1,17 +1,30 @@
 import React, { useState } from "react";
 import { IoAdd, IoEye, IoWatch } from "react-icons/io5";
-import { PacientesModal } from "./PacientesModal";
 import { Consulta } from "@prisma/client";
 import { useStore } from "@/src/store";
 import { ConsultaModal } from "./ConsultaModal";
 import { formatFecha } from "@/src/utils";
 import { VerModal } from "./verConsultaModal";
+import { useEffect } from "react";
 
-export default function FichaAddConsulta() {
+type ConsultasProps = {
+  consultas?: Consulta[];
+};
+
+export default function FichaAddConsulta({ consultas }: ConsultasProps) {
+  useEffect(() => {
+    limpiarTodo();
+    consultas?.forEach((consulta) => {
+      getConsultaCreada(consulta);
+    });
+  
+}, [consultas]);
+
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [verOpen, setVerOpen] = useState<boolean>(false);
   const addConsultasAFicha = useStore((state) => state.addConsultasAFicha);
   const consultasDeFicha = useStore((state) => state.consultasDeFicha);
+  const limpiarTodo = useStore((state) => state.limpiarTodo);
   function getConsultaCreada(consulta: Consulta) {
     addConsultasAFicha(consulta);
   }
@@ -30,6 +43,8 @@ export default function FichaAddConsulta() {
     setConsultaOpen(consulta);
     setVerOpen(true);
   }
+
+  
 
   return (
     <>
@@ -55,7 +70,7 @@ export default function FichaAddConsulta() {
           </thead>
           <tbody>
             {consultasDeFicha.map((consulta) => (
-              <tr key={consulta.createdAt.getTime()}>
+              <tr key={consulta.id}>
                 <td className="px-4 py-2">{formatFecha(consulta.createdAt)}</td>
                 <td className="px-4 py-2">{consulta.hora_consulta}</td>
                 <td className="px-4 py-2">{consulta.observacion}</td>
@@ -85,7 +100,11 @@ export default function FichaAddConsulta() {
         setModalOpen={setModalOpen}
         setConsultaForm={getConsultaCreada}
       />
-      <VerModal verOpen={verOpen} setVerOpen={setVerOpen} consulta={verConsulta} />
+      <VerModal
+        verOpen={verOpen}
+        setVerOpen={setVerOpen}
+        consulta={verConsulta}
+      />
     </>
   );
 }

@@ -28,7 +28,8 @@ export default async function FichaPage({searchParams,}: {searchParams: { page: 
   const page = +searchParams.page || 1;
   const actualizar=searchParams.actualizar||null;
   const pageSize = 5;
-  if(actualizar !== null ) redirect("/fichas");
+  //TODO: comente por que en la parte de server action puse el revalidate(/url)
+  //if(actualizar !== null ) redirect("/fichas");
   if (page < 0) redirect("/fichas");
   const fichasData = getFichas(page, pageSize);
   const totalFichasData = getCountFichas();
