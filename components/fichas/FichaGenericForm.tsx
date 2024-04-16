@@ -113,6 +113,7 @@ export default function FichaGenericForm({
                 type="date"
                 name="createdAt"
                 id="createdAt"
+                autoComplete="off"
                 className="w-52 p-3 bg-white"
                 value={createdAt}
                 disabled={true}

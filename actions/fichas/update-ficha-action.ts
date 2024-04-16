@@ -3,20 +3,32 @@
 import { prisma } from "@/src/lib/prisma";
 import { Ficha } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import { consultas } from "../../prisma/data/consultas";
 
-export async function updateFicha(data: Ficha, idFicha: number): Promise<boolean> {
-  const { id, updatedAt, tipo_seguro, ...restData } = data;
-
+export async function updateFicha(
+  data: any,
+  idFicha: number
+): Promise<boolean> {
   try {
-    await prisma.ficha.update({
+    //console.log(data.consultas);
+    let fichaUpdate: Ficha = await prisma.ficha.update({
       where: { id: idFicha },
       data: {
-        updatedAt,
-        tipo_seguro, // Actualiza el campo tipo_seguro
-        ...restData, // Otros campos de actualización (si los hay)
+        tipo_seguro: data.tipo_seguro,
+        consultas: {
+          create: data.consultas
+            .map((consulta: any) => ({
+              hora_consulta: consulta.hora_consulta,
+              observacion: consulta.observacion,
+              indicacion: consulta.indicacion,
+              receta: consulta.receta,
+              asistio: consulta.asistio,
+            })),
+        },
       },
     });
-    console.log(`Tipo de seguro actualizado para la ficha con ID ${id}`);
+
+    revalidatePath("/fichas");
     return true;
   } catch (error) {
     console.error("Error al actualizar la ficha:", error);

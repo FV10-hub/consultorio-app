@@ -29,14 +29,14 @@ export default function FichaAddConsulta({ consultas }: ConsultasProps) {
     addConsultasAFicha(consulta);
   }
   const [verConsulta, setConsultaOpen] = useState<Consulta>({
-    id: null,
-    createdAt: null,
-    updatedAt: null,
+    id: 0,
+    createdAt: new Date(),
+    updatedAt:  new Date(),
     hora_consulta: "",
     observacion: "",
     indicacion: "",
     receta: "",
-    asistio: false,
+    asistio: true,
     fichaId: 0,
   });
   function handleVerConsulta(consulta: Consulta) {
@@ -69,7 +69,9 @@ export default function FichaAddConsulta({ consultas }: ConsultasProps) {
             </tr>
           </thead>
           <tbody>
-            {consultasDeFicha.map((consulta) => (
+            {consultasDeFicha
+            .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+            .map((consulta) => (
               <tr key={consulta.id}>
                 <td className="px-4 py-2">{formatFecha(consulta.createdAt)}</td>
                 <td className="px-4 py-2">{consulta.hora_consulta}</td>

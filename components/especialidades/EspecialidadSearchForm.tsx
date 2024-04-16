@@ -23,6 +23,7 @@ export default function EspecialidadSearchForm() {
       <input
         type="text"
         placeholder="Buscar Especialidad"
+        autoComplete="off"
         className="p-2 placeholder-gray-400 w-full text-xs"
         name="search"
       />

@@ -24,6 +24,7 @@ export default function PersonaSearchForm() {
       <input
         type="text"
         placeholder="Buscar Persona"
+        autoComplete="off"
         className="p-2 placeholder-gray-400 w-full text-xs"
         name="search"
       />

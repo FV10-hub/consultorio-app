@@ -20,6 +20,7 @@ export default async function EspecialidadForm({
           type="text"
           id="codigo"
           name="codigo"
+          autoComplete="off"
           className="block w-full p-3 bg-slate-100"
           placeholder="Codigo"
           defaultValue={especialidad?.codigo || ""}
@@ -36,6 +37,7 @@ export default async function EspecialidadForm({
           type="text"
           id="descripcion"
           name="descripcion"
+          autoComplete="off"
           className="block w-full p-3 bg-slate-100"
           placeholder="descripcion"
           defaultValue={especialidad?.descripcion || ""}

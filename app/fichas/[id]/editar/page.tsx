@@ -3,6 +3,7 @@ import GoBackButton from "@/components/ui/GoBackButton";
 import Heading from "@/components/ui/Heading";
 import { prisma } from "@/src/lib/prisma";
 import { notFound } from "next/navigation";
+import { consultas } from '../../../../prisma/data/consultas';
 
 async function getFichaById(id: number) {
   const ficha = await prisma.ficha.findUnique({
@@ -12,7 +13,8 @@ async function getFichaById(id: number) {
     include:{
         persona: true,
         consultas: true
-    }
+
+    },
   });
   if (!ficha) {
     notFound();
@@ -29,7 +31,6 @@ export default async function EditarFichaPage({
     params: { id: string };
   }) {
     const ficha = await getFichaById(+params.id);
-    console.log(ficha)
   return (
     <>
       <Heading>Editar Ficha</Heading>

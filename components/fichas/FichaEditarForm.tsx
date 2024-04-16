@@ -16,10 +16,25 @@ export default function FichaEditarForm({ ficha }: FichaEditarProps) {
   const router = useRouter();
   const fichaAEditar = ficha;
   const limpiarTodo = useStore((state) => state.limpiarTodo);
+  const consultasDeFicha = useStore((state) => state.consultasDeFicha);
 
   //GUARDAR
   const handleGuardarFicha = async () => {
-    const response = await updateFicha(fichaAEditar, ficha.id);
+    const data = {
+      id: fichaAEditar.id,
+      tipo_seguro: fichaAEditar.tipo_seguro,
+      consultas: consultasDeFicha
+      .filter(consulta => consulta.id === 0 || consulta.id === undefined)
+      .map((consulta) => ({
+        id: consulta.id,
+        hora_consulta: consulta.hora_consulta,
+        observacion: consulta.observacion,
+        indicacion: consulta.indicacion,
+        receta: consulta.receta,
+        asistio: consulta.asistio ? true : false,
+      })),
+    };
+    const response = await updateFicha(data, ficha.id);
     if (!response) {
       toast.error("No se Guardo");
       return;
@@ -53,6 +68,7 @@ export default function FichaEditarForm({ ficha }: FichaEditarProps) {
                 type="text"
                 name="createdAt"
                 id="createdAt"
+                autoComplete="off"
                 className="w-52 p-3 bg-white"
                 defaultValue={formatFecha(fichaAEditar.createdAt)}
                 disabled={true}
@@ -90,6 +106,7 @@ export default function FichaEditarForm({ ficha }: FichaEditarProps) {
                 className="w-52 p-3 bg-white"
                 id="tipo_seguro"
                 name="tipo_seguro"
+                autoComplete="off"
                 disabled={true}
                 defaultValue={fichaAEditar.tipo_seguro || "NO_TIENE"}
               />

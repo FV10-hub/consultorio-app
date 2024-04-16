@@ -15,7 +15,7 @@ export default async function FichaForms({
 
   return (
     <>
-      <FichaGenericForm pacientes={pacientes} totalPacientes={totalPacientes} />
+      <FichaGenericForm pacientes={pacientes ?? []} totalPacientes={totalPacientes ?? 1} />
     </>
   );
 }

@@ -20,6 +20,7 @@ export default async function PersonaForm({persona}: PersonaProps) {
           type="text"
           id="nombre_completo"
           name="nombre_completo"
+          autoComplete="off"
           className="block w-full p-3 bg-slate-100"
           placeholder="Nombre Completo"
           defaultValue={persona?.nombre_completo || ''}
@@ -36,6 +37,7 @@ export default async function PersonaForm({persona}: PersonaProps) {
           type="text"
           id="documento"
           name="documento"
+          autoComplete="off"
           className="block w-full p-3 bg-slate-100"
           placeholder="Documento"
           defaultValue={persona?.documento || ''}
@@ -52,6 +54,7 @@ export default async function PersonaForm({persona}: PersonaProps) {
           type="text"
           id="email"
           name="email"
+          autoComplete="off"
           className="block w-full p-3 bg-slate-100"
           placeholder="Correo"
           defaultValue={persona?.email || ''}

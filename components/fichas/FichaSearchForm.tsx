@@ -23,6 +23,7 @@ export default function FichaSearchForm() {
       <input
         type="text"
         placeholder="Buscar Ficha"
+        autoComplete="off"
         className="p-2 placeholder-gray-400 w-full text-xs"
         name="search"
       />

@@ -122,9 +122,9 @@ export const VerModal: React.FC<ModalProps> = ({
               <button
                 onClick={() => {
                   setFormState({
-                    id: null,
-                    createdAt: null,
-                    updatedAt: null,
+                    id: 0,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
                     hora_consulta: "",
                     observacion: "",
                     indicacion: "",

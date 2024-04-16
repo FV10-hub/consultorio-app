@@ -19,18 +19,18 @@ export const ConsultaModal: React.FC<ModalProps> = ({
     observacion: "",
     indicacion: "",
     receta: "",
-    asistio: false,
+    asistio: true,
     fichaId: 0,
   });
 
   const { hora_consulta, observacion, indicacion, receta, asistio, fichaId } =
     formState;
 
-  function onPacienteSelect(e) {
+  function onPacienteSelect(e: any) {
     e.preventDefault();
     const now = new Date();
     const nuevaConsulta: Consulta = {
-      id: null,
+      id: 0,
       createdAt: now,
       updatedAt: now,
       hora_consulta,

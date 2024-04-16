@@ -37,6 +37,8 @@ model Ficha {
   tipo_seguro       String?
   persona           Persona    @relation(fields: [personaId], references: [id])
   consultas         Consulta[]
+
+  @@map("consultas")
 }
 
 model Consulta {
