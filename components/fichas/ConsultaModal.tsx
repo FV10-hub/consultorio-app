@@ -14,8 +14,14 @@ export const ConsultaModal: React.FC<ModalProps> = ({
   setModalOpen,
   setConsultaForm,
 }) => {
+  function obtenerHoraActual() {
+    const fecha = new Date();
+    const hora = fecha.getHours().toString().padStart(2, "0");
+    const minuto = fecha.getMinutes().toString().padStart(2, "0");
+    return `${hora}:${minuto}`;
+  }
   const { formState, onIputChange, onResetForm } = useForm({
-    hora_consulta: "",
+    hora_consulta: obtenerHoraActual(),
     observacion: "",
     indicacion: "",
     receta: "",
@@ -143,9 +149,13 @@ export const ConsultaModal: React.FC<ModalProps> = ({
               </div>
             </form>
             <div className="flex items-center justify-evenly mt-4">
-              <button onClick={() => {
-                onResetForm();
-                setModalOpen(!modalOpen)}} className="btn">
+              <button
+                onClick={() => {
+                  onResetForm();
+                  setModalOpen(!modalOpen);
+                }}
+                className="btn"
+              >
                 Cancelar
               </button>
               <button

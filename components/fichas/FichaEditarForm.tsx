@@ -7,6 +7,7 @@ import { updateFicha } from "@/actions/fichas/update-ficha-action";
 import { toast } from "react-toastify";
 import { useStore } from "@/src/store";
 import { useRouter } from "next/navigation";
+import FichaEditConsulta from "./FichaEditConsulta";
 
 type FichaEditarProps = {
   ficha: FichaWithPersonaAndConsultas;
@@ -113,7 +114,7 @@ export default function FichaEditarForm({ ficha }: FichaEditarProps) {
             </div>
           </div>
         </div>
-        <FichaAddConsulta consultas={fichaAEditar.consultas ?? []} />
+        <FichaEditConsulta consultas={ficha.consultas ?? []} />
       </div>
     </>
   );

@@ -49,7 +49,7 @@ export default async function PersonaPage({
         </Link>
         <PersonaSearchForm />
       </div>
-      <PersonaTable personas={personas}/>
+      <PersonaTable personas={personas ?? []}/>
       <PersonaPagination page={page} totalPages={totalPages} />
     </>
   );

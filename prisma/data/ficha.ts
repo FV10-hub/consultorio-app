@@ -2,7 +2,7 @@ export const fichas = [
     {
       personaId: 1,
     },
-    {
+    /*{
       personaId: 3,
     },
     {
@@ -28,6 +28,6 @@ export const fichas = [
     },
     {
       personaId: 10,
-    },
+    },*/
   ];
   

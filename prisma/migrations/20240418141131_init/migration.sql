@@ -30,14 +30,25 @@ CREATE TABLE "Ficha" (
     "id" SERIAL NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "personaId" INTEGER NOT NULL,
+    "tipo_seguro" TEXT,
+
+    CONSTRAINT "Ficha_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Consulta" (
+    "id" SERIAL NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     "hora_consulta" TEXT,
     "observacion" TEXT,
     "indicacion" TEXT,
     "receta" TEXT,
     "asistio" BOOLEAN NOT NULL DEFAULT false,
-    "personaId" INTEGER NOT NULL,
+    "fichaId" INTEGER NOT NULL,
 
-    CONSTRAINT "Ficha_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Consulta_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -51,3 +62,6 @@ CREATE UNIQUE INDEX "Ficha_personaId_key" ON "Ficha"("personaId");
 
 -- AddForeignKey
 ALTER TABLE "Ficha" ADD CONSTRAINT "Ficha_personaId_fkey" FOREIGN KEY ("personaId") REFERENCES "Persona"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Consulta" ADD CONSTRAINT "Consulta_fichaId_fkey" FOREIGN KEY ("fichaId") REFERENCES "Ficha"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -18,6 +18,7 @@ interface Store {
 
 export const useStore = create<Store>((set, get) => ({
   pacienteState: {} as Persona,
+  consultasDeFicha: [],
   agregarPacienteAFicha: (persona: Persona) => {
     set(() => ({
       pacienteState: persona,
@@ -46,13 +47,14 @@ export const useStore = create<Store>((set, get) => ({
           ...consulta,
         },
       ];
+      console.log(consultas),
     //}
     set(() => ({
+      
       consultasDeFicha: consultas,
 
     }));
   },
-  consultasDeFicha: [],
   limpiarTodo: ()=>{
     set(() => ({
       consultasDeFicha: [],

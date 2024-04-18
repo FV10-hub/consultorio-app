@@ -7,7 +7,7 @@ export const personas = [
       esDoctor: true,
       esUsuario: false,
       esPaciente: false
-    },
+    },/*
     {
       nombre_completo: "María López",
       documento: "987654321",
@@ -295,6 +295,6 @@ export const personas = [
       esUsuario: false,
       esPaciente: false
     }
-    
+  */  
   ];
   

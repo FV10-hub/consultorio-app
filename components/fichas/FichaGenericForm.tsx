@@ -19,6 +19,7 @@ export default function FichaGenericForm({
   pacientes,
   totalPacientes,
 }: FichaProps) {
+  
   //modal
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
@@ -38,7 +39,9 @@ export default function FichaGenericForm({
     //TODO: agregar aca personaId si hay problemas
     agregarPacienteAFicha(persona);
     //TODO: mala practica
-    onIputChange({target: { name: "paciente_nombre", value: persona.nombre_completo }});
+    onIputChange({
+      target: { name: "paciente_nombre", value: persona.nombre_completo },
+    });
   }
 
   //LOCAL
@@ -54,49 +57,48 @@ export default function FichaGenericForm({
 
   useEffect(() => {
     clearPacienteState();
-  }, []);
+  }, [clearPacienteState]);
 
   const { createdAt, paciente_nombre, tipo_seguro, personaId } = formState;
 
   //GUARDAR
   const handleCrearFicha = async () => {
-    
     const data = {
-      tipo_seguro: tipo_seguro, 
+      tipo_seguro: tipo_seguro,
       personaId: pacienteState.id,
-      consultas: consultasDeFicha.map(consulta => ({
-          hora_consulta: consulta.hora_consulta,
-          observacion: consulta.observacion,
-          indicacion: consulta.indicacion,
-          receta: consulta.receta,
-          asistio: consulta.asistio ? true : false 
-      }))
-  };
-    
-    if(data.personaId === null || data.personaId <= 0) {
-        toast.error("Debe seleccionar un Paciente");
-      return
+      consultas: consultasDeFicha.map((consulta) => ({
+        hora_consulta: consulta.hora_consulta,
+        observacion: consulta.observacion,
+        indicacion: consulta.indicacion,
+        receta: consulta.receta,
+        asistio: consulta.asistio ? true : false,
+      })),
+    };
+
+    if (data.personaId === null || data.personaId <= 0) {
+      toast.error("Debe seleccionar un Paciente");
+      return;
     }
 
-    const response = await createFicha(data)
-    if(!response) {
-        toast.error("No se Guardo")
-        return;
+    const response = await createFicha(data);
+    if (!response) {
+      toast.error("No se Guardo");
+      return;
     }
 
-    toast.success('Se guardo')
+    toast.success("Se guardo");
     limpiarTodo();
     router.push("/fichas");
-    
-}
+  };
 
   return (
     <>
       <div className="border-b border-gray-900/10 pb-12 ">
         <div className="flex flex-col lg:flex-row lg:justify-end gap-5">
-          <button 
-          onClick={handleCrearFicha}
-          className="btn bg-green-500 hover:bg-green-600 text-white">
+          <button
+            onClick={handleCrearFicha}
+            className="btn bg-green-500 hover:bg-green-600 text-white"
+          >
             Guardar Ficha <AiFillSave className="ml-2" size={18} />
           </button>
         </div>
@@ -152,24 +154,19 @@ export default function FichaGenericForm({
               Tipo de Seguro
             </label>
             <div className="mt-2">
-              <select
-                className="w-52 p-3 bg-white"
-                id="tipo_seguro"
+              <input
+                type="text"
                 name="tipo_seguro"
+                id="tipo_seguro"
+                className="w-96 p-3"
+                placeholder="Escribe tu tipo de seguro"
                 value={tipo_seguro}
                 onChange={onIputChange}
-              >
-                <option value=""> -- Seleccione -- </option>
-                {tipoSegurosList.map((tipo) => (
-                  <option key={tipo} value={tipo}>
-                    {tipo}
-                  </option>
-                ))}
-              </select>
+              />
             </div>
           </div>
         </div>
-        <FichaAddConsulta />
+        <FichaAddConsulta/>
         <PacientesModal
           personas={pacientesForms}
           modalOpen={modalOpen}

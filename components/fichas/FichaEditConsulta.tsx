@@ -6,12 +6,20 @@ import { ConsultaModal } from "./ConsultaModal";
 import { formatFecha } from "@/src/utils";
 import { VerModal } from "./verConsultaModal";
 import { useEffect } from "react";
-import { useDebouncedCallback } from "use-debounce";
+import { usePathname } from "next/navigation";
 
-export default function FichaAddConsulta() {
+type ConsultasProps = {
+  consultas?: Consulta[];
+};
+
+export default function FichaEditConsulta({ consultas }: ConsultasProps) {
   useEffect(() => {
     limpiarTodo();
-  }, []);
+    consultas?.forEach((consulta) => {
+      getConsultaCreada(consulta);
+    });
+  }, [consultas]);
+  const pathName = usePathname();
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [verOpen, setVerOpen] = useState<boolean>(false);
@@ -36,6 +44,24 @@ export default function FichaAddConsulta() {
     setConsultaOpen(consulta);
     setVerOpen(true);
   }
+  const [searchTerm, setSearchTerm] = useState("");
+  const [listaFiltrada, setListaFiltrada] = useState(consultas);
+  const onChangePaciente = (event: any) => {
+    const nuevoFiltro = event.target.value;
+    setSearchTerm(nuevoFiltro);
+    if (nuevoFiltro === "") {
+      setListaFiltrada(consultas);
+    } else {
+      const listaFiltrada = consultas!
+        .filter((consulta) =>
+          consulta.observacion
+            ?.toLocaleLowerCase()
+            .includes(searchTerm.toLowerCase())
+        )
+        .slice(0, 5);
+      setListaFiltrada(listaFiltrada);
+    }
+  };
 
   return (
     <>
@@ -48,6 +74,21 @@ export default function FichaAddConsulta() {
           Agregar Consulta <IoAdd className="ml-2" size={18} />
         </button>
       </div>
+      {pathName.includes("editar") && (
+        <div className="mt-5 p-3">
+          <input
+            type="text"
+            name="search"
+            id="search"
+            autoComplete="off"
+            className="w-96 p-3 rounded-md"
+            placeholder="Buscar conulta por observacion"
+            value={searchTerm}
+            onChange={onChangePaciente}
+          />
+        </div>
+      )}
+
       <div className="bg-white shadow-md rounded-lg p-4 mt-4">
         <table className="w-full table-auto table table-xs table-pin-rows table-pin-cols">
           <thead>
@@ -60,7 +101,7 @@ export default function FichaAddConsulta() {
             </tr>
           </thead>
           <tbody>
-            {consultasDeFicha
+            {listaFiltrada!
               .sort(
                 (a, b) =>
                   new Date(b.createdAt).getTime() -

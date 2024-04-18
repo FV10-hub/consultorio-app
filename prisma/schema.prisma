@@ -1,10 +1,11 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  
 }
 
 model Persona {
@@ -38,7 +39,6 @@ model Ficha {
   persona           Persona    @relation(fields: [personaId], references: [id])
   consultas         Consulta[]
 
-  @@map("consultas")
 }
 
 model Consulta {

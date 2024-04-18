@@ -32,7 +32,7 @@ export default function AddPersona({
     const response = await createPersona(result.data);
     if (response?.errors) {
       response.errors.forEach((issue) => {
-        toast.error(issue.message);
+        toast.error(issue);
       });
       return;
     }

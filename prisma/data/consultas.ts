@@ -22,7 +22,7 @@ export const consultas = [
       receta: "Medicamento Z (dosis según prescripción médica)",
       asistio: false,
       fichaId: 1, // Relaciona la ficha con la quinta persona del array "personas" (ajustar según id)
-    },
+    },/*
     {
       hora_consulta: "16:15",
       observacion: "Control diabetes tipo 2",
@@ -78,6 +78,6 @@ export const consultas = [
       receta: "No hay receta",
       asistio: true,
       fichaId: 1, // Relaciona la ficha con la décima persona del array "personas" (ajustar según id)
-    },
+    },*/
   ];
   

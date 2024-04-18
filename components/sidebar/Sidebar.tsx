@@ -30,6 +30,12 @@ const menus = [
     },
     {
       id: 3,
+      name: "Galeria",
+      imagen: "galeria",
+      path: "/galeria",
+    },
+    {
+      id: 4,
       name: "Fichas",
       imagen: "ficha",
       path: "/fichas",
