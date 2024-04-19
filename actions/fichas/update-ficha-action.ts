@@ -10,7 +10,6 @@ export async function updateFicha(
   idFicha: number
 ): Promise<boolean> {
   try {
-    //console.log(data.consultas);
     let fichaUpdate: Ficha = await prisma.ficha.update({
       where: { id: idFicha },
       data: {

@@ -2,7 +2,6 @@ import PersonaPagination from "@/components/personas/PersonaPagination";
 import PersonaSearchForm from "@/components/personas/PersonaSearchForm";
 import PersonaTable from "@/components/personas/PersonaTable";
 import Heading from "@/components/ui/Heading";
-import PersonaDetalle from "@/components/personas/PersonaDetalle";
 import { prisma } from "@/src/lib/prisma";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -12,6 +11,9 @@ async function getPersonas(page: number, pageSize: number) {
   return await prisma.persona.findMany({
     take: pageSize,
     skip: skipPage,
+    orderBy:{
+      createdAt: 'desc'
+    }
   });
 }
 

@@ -42,7 +42,6 @@ export const useStore = create<Store>((set, get) => ({
           ...consulta,
         },
       ];
-      console.log(consultas),
     //}
     set(() => ({
       

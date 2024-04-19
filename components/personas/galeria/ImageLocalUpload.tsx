@@ -1,20 +1,24 @@
 "use client";
+import { revalidatePath } from "next/cache";
 import Image from "next/image";
-import { usePathname,useRouter } from "next/navigation";
-import { ChangeEvent, FormEvent, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { IoCloudUpload } from "react-icons/io5";
 import { TbPhotoPlus } from "react-icons/tb";
 import { toast } from "react-toastify";
 
-export default function ImageUpload() {
+export default function ImageUpload({ id }: { id: string }) {
+
   
-  const pathName = usePathname();
-  const match = pathName.match(/\/(\d+)\/galeria/);
-  const idPersona = match ? match[1] : "1";
+  
+
   const [file, setFile] = useState<File | undefined>();
   const [descripcion, setDescripcion] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
+  useEffect(() => {
+    router.refresh()
+  }, []);
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!file) return;
@@ -22,7 +26,7 @@ export default function ImageUpload() {
     try {
       const data = new FormData();
       data.set("file", file);
-      data.set("idPersona", idPersona!);
+      data.set("idPersona", id);
       data.set("descripcion", descripcion!);
 
       const res = await fetch("/personas/api/upload", {
@@ -31,12 +35,15 @@ export default function ImageUpload() {
       });
 
       if (!res.ok) {
-        console.log("File uploaded successfully");
         toast.error("No se guardo la imagen");
         return;
       }
-      toast.success("Imagen guardad correctamente");
+      setFile(undefined);
+      setDescripcion("");
+
+      toast.success("Imagen subida correctamente");
       router.push("/personas");
+      
     } catch (error) {
       console.error(error);
     }
@@ -71,7 +78,7 @@ export default function ImageUpload() {
                 name="descripcion"
                 autoComplete="off"
                 className="block w-full p-3 bg-slate-100"
-                placeholder="Escribe una descripcion"
+                placeholder="Escribe una descripcion(min. 5 letras)"
                 value={descripcion}
                 onChange={(e) => setDescripcion(e.target.value)}
               />
@@ -114,8 +121,9 @@ export default function ImageUpload() {
             </div>
             <div className="flex justify-center">
               <button
-                className="bg-orange-500 hover:bg-orange-600 text-white rounded-md w-1/5 mt-5 p-3 uppercase font-bold cursor-pointer"
-                disabled={!file}
+                className={`${file && descripcion.length > 3 
+                  ? 'bg-orange-500 hover:bg-orange-600 text-white rounded-md w-1/5 mt-5 p-3 uppercase font-bold cursor-pointer' 
+                  : 'bg-gray-300 text-gray-600 rounded-md w-1/5 mt-5 p-3 uppercase font-bold opacity-50 cursor-not-allowed'}`}
               >
                 <div className="flex flex-row justify-evenly items-center">
                   Subir <IoCloudUpload />

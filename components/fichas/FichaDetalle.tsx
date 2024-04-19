@@ -1,8 +1,5 @@
-import { FichasWithPersonas } from "@/app/fichas/page";
-import { Ficha } from "@prisma/client";
+import { formatMilesSeparador } from "@/src/utils";
 import Link from "next/link";
-import { fichas } from '../../prisma/data/ficha';
-import { personas } from '../../prisma/data/personas';
 
 type FichaProps = {
   ficha: {
@@ -31,7 +28,7 @@ export default function FichaDetalle({ ficha }: FichaProps) {
   return (
     <>
       <tr className="border-b ">
-        <td className="p-3 text-lg text-gray-800">{ficha.persona.documento}</td>
+        <td className="p-3 text-lg text-gray-800">{formatMilesSeparador(ficha.persona.documento)}</td>
         <td className="p-3 text-lg text-gray-800">{ficha.persona.nombre_completo}</td>
         <td className="p-3 text-lg text-gray-800 ">
                 <div className="flex gap-2 items-center">

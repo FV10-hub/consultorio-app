@@ -17,7 +17,6 @@ export default function AddFichaForm({
     };
 
     const result = FichaSchema.safeParse(data);
-    console.log(result);
     if (!result.success) {
       result.error.issues.forEach((issue) => {
         toast.error(issue.message);

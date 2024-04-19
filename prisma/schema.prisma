@@ -20,7 +20,7 @@ model Persona {
   esUsuario         Boolean    @default(false)
   esPaciente        Boolean    @default(false)
   ficha             Ficha?
-  imegenes          Galeria[]
+  galeria           Galeria[]
 }
 
 model Especialidades {
@@ -60,7 +60,7 @@ model Galeria {
   id                Int        @id @default(autoincrement())
   createdAt         DateTime   @default(now())
   updatedAt         DateTime   @updatedAt
-  personaId         Int        @unique
+  personaId         Int        
   persona           Persona    @relation(fields: [personaId], references: [id])
   url               String?
   descripcion       String?

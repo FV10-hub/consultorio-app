@@ -1,12 +1,11 @@
+import { formatMilesSeparador } from "@/src/utils";
 import { Persona } from "@prisma/client";
-import ImageUpload from "./ImageUpload";
 
 
 type PersonaProps = {
   persona?: Persona
 }
 export default async function PersonaForm({persona}: PersonaProps) {
-    const nombreImagenSiVamosAGuardar = '';
   return (
     <>
       <div className="mb-4">
@@ -40,7 +39,7 @@ export default async function PersonaForm({persona}: PersonaProps) {
           autoComplete="off"
           className="block w-full p-3 bg-slate-100"
           placeholder="Documento"
-          defaultValue={persona?.documento || ''}
+          defaultValue={formatMilesSeparador(persona?.documento || '') }
         />
       </div>
       <div className="mb-4">
@@ -62,21 +61,6 @@ export default async function PersonaForm({persona}: PersonaProps) {
       </div>
       <div className="mb-4">
         <label
-          htmlFor="esDoctor"
-          className="block text-gray-700 text-sm font-bold mb-2"
-        >
-          Es Doctor?
-        </label>
-        <input
-          type="checkbox"
-          id="esDoctor"
-          name="esDoctor"
-          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-          defaultChecked={persona?.esDoctor || false}
-        />
-      </div>
-      <div className="mb-4">
-        <label
           htmlFor="esPaciente"
           className="block text-gray-700 text-sm font-bold mb-2"
         >
@@ -87,12 +71,9 @@ export default async function PersonaForm({persona}: PersonaProps) {
           id="esPaciente"
           name="esPaciente"
           className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-          defaultChecked={persona?.esPaciente || false}
+          defaultChecked={persona?.esPaciente || true}
         />
       </div>
-      <ImageUpload  
-                image={nombreImagenSiVamosAGuardar}
-            />
     </>
   );
 }

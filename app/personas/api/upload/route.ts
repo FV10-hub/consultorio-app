@@ -1,10 +1,8 @@
-import { promises as fsPromises } from "fs";
-import { writeFile } from "fs/promises";
-import { join } from "path";
-import { NextRequest, NextResponse } from "next/server";
 import { createGaleria } from "@/actions/personas/galeria/create-galeria-action";
-
-const { mkdir } = fsPromises;
+import { promises as fsPromises, mkdirSync } from "fs";
+import { writeFile } from "fs/promises";
+import { NextRequest, NextResponse } from "next/server";
+import path, { join } from "path";
 
 export async function POST(request: NextRequest) {
   const data = await request.formData();
@@ -19,17 +17,19 @@ export async function POST(request: NextRequest) {
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
-  const filePath = join(
-    process.cwd(),
+  const filePath = path.join(
+    //TODO: no hace falta public por uqe por defecto parte desde ahi "public",
     "public",
     "images",
+    "personas",
     idPersona,
-    file.name
+    new Date().getTime().toString().concat("-").concat(file.name)
   );
 
   // Crear los directorios necesarios si no existen
+  //TODO: comente esto por uqe no necesito guardar el path absoluto process.cwd(),
   try {
-    await mkdir(join(process.cwd(), "public", "images", idPersona), {
+    await mkdirSync(join("public", "images", "personas", idPersona), {
       recursive: true,
     });
   } catch (error) {
@@ -52,12 +52,11 @@ export async function POST(request: NextRequest) {
   }
 
   const galeriaAInsertar = {
-    personaId: idPersona,
+    personaId: +idPersona,
     descripcion,
-    url: filePath,
+    url: filePath.replace(/\\/g, "/"),
   };
 
   const inserted = createGaleria(galeriaAInsertar);
-  console.log("EEN EL SERVIDOR SE GUARDO ? ", inserted !== null ? true : false);
   return NextResponse.json({ success: true });
 }

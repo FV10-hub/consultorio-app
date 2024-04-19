@@ -30,7 +30,6 @@ export default async function EditarFichaPage({
     params: { id: string };
   }) {
     const ficha = await getFichaById(+params.id);
-    console.log(ficha)
   return (
     <>
       <Heading>Editar Ficha</Heading>

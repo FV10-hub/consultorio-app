@@ -1,6 +1,5 @@
 import EditEspecialidadForm from "@/components/especialidades/EditEspecialidadForm";
 import EspecialidadForm from "@/components/especialidades/EspecialidadForms";
-import EditPersonaForm from "@/components/personas/EditPersonaForm";
 import GoBackButton from "@/components/ui/GoBackButton";
 import Heading from "@/components/ui/Heading";
 import { prisma } from "@/src/lib/prisma";

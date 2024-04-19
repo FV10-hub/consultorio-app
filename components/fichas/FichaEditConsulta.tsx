@@ -9,16 +9,17 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 type ConsultasProps = {
-  consultas?: Consulta[];
+  consultas: Consulta[];
 };
 
 export default function FichaEditConsulta({ consultas }: ConsultasProps) {
   useEffect(() => {
     limpiarTodo();
     consultas?.forEach((consulta) => {
-      getConsultaCreada(consulta);
+      addConsultasAFicha(consulta);
     });
   }, [consultas]);
+
   const pathName = usePathname();
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -26,9 +27,7 @@ export default function FichaEditConsulta({ consultas }: ConsultasProps) {
   const addConsultasAFicha = useStore((state) => state.addConsultasAFicha);
   const consultasDeFicha = useStore((state) => state.consultasDeFicha);
   const limpiarTodo = useStore((state) => state.limpiarTodo);
-  function getConsultaCreada(consulta: Consulta) {
-    addConsultasAFicha(consulta);
-  }
+  
   const [verConsulta, setConsultaOpen] = useState<Consulta>({
     id: 0,
     createdAt: new Date(),
@@ -62,6 +61,13 @@ export default function FichaEditConsulta({ consultas }: ConsultasProps) {
       setListaFiltrada(listaFiltrada);
     }
   };
+
+  function getConsultaCreada(consulta: Consulta) {
+    addConsultasAFicha(consulta);
+    const nuevaLista = [...listaFiltrada, consulta];
+    // Actualizar el estado con la nueva lista
+    setListaFiltrada(nuevaLista);
+  }
 
   return (
     <>

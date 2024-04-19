@@ -6,7 +6,7 @@ import Logo from "../ui/Logo";
 const menus = [
     {
       id: 1,
-      name: "Personas",
+      name: "Pacientes",
       imagen: "paciente",
       path: "/personas",
     }/*,
@@ -21,7 +21,7 @@ const menus = [
       name: "Doctores",
       imagen: "doctor",
       path: "doctores",
-    }*/,
+    },
     {
       id: 2,
       name: "Especialidades",
@@ -33,7 +33,7 @@ const menus = [
       name: "Galeria",
       imagen: "galeria",
       path: "/galeria",
-    },
+    }*/,
     {
       id: 4,
       name: "Fichas",

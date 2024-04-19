@@ -1,3 +1,4 @@
+import { formatMilesSeparador } from "@/src/utils";
 import { Persona } from "@prisma/client";
 import Link from "next/link";
 import { IoImageOutline } from "react-icons/io5";
@@ -10,7 +11,7 @@ export default function PersonaDetalle({ persona }: PersonaProps) {
   return (
     <>
       <tr className="border-b ">
-        <td className="p-3 text-lg text-gray-800">{persona.documento}</td>
+        <td className="p-3 text-lg text-gray-800">{formatMilesSeparador(persona.documento)}</td>
         <td className="p-3 text-lg text-gray-800">{persona.nombre_completo}</td>
         <td className="p-3 text-lg text-gray-800">{persona.email}</td>
         <td className="p-3  text-sm text-gray-800 flex flex-row items-center justify-evenly">

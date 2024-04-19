@@ -4,9 +4,9 @@ export const personas = [
       documento: "123456789",
       email: "juan.perez@correo.com",
       password: "clave123",
-      esDoctor: true,
+      esDoctor: false,
       esUsuario: false,
-      esPaciente: false
+      esPaciente: true
     },/*
     {
       nombre_completo: "María López",

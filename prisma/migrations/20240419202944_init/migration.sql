@@ -72,9 +72,6 @@ CREATE UNIQUE INDEX "Persona_email_key" ON "Persona"("email");
 -- CreateIndex
 CREATE UNIQUE INDEX "Ficha_personaId_key" ON "Ficha"("personaId");
 
--- CreateIndex
-CREATE UNIQUE INDEX "Galeria_personaId_key" ON "Galeria"("personaId");
-
 -- AddForeignKey
 ALTER TABLE "Ficha" ADD CONSTRAINT "Ficha_personaId_fkey" FOREIGN KEY ("personaId") REFERENCES "Persona"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 

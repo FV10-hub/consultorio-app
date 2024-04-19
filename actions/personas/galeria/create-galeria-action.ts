@@ -6,10 +6,9 @@ import { revalidatePath } from "next/cache";
 export async function createGaleria(data: any) {
   try {
     const inserted = await prisma.galeria.create({
-      data
+      data,
     });
-    console.log("se inserto o no ? ", inserted.id)
-    revalidatePath(`/personas/${data.idPersona}/galeria`);
+    revalidatePath(`/personas/${data.personaId}/galeria`);
     return inserted;
   } catch (error) {
     return {
