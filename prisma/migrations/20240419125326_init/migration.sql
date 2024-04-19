@@ -51,6 +51,18 @@ CREATE TABLE "Consulta" (
     CONSTRAINT "Consulta_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Galeria" (
+    "id" SERIAL NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "personaId" INTEGER NOT NULL,
+    "url" TEXT,
+    "descripcion" TEXT,
+
+    CONSTRAINT "Galeria_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Persona_documento_key" ON "Persona"("documento");
 
@@ -60,8 +72,14 @@ CREATE UNIQUE INDEX "Persona_email_key" ON "Persona"("email");
 -- CreateIndex
 CREATE UNIQUE INDEX "Ficha_personaId_key" ON "Ficha"("personaId");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "Galeria_personaId_key" ON "Galeria"("personaId");
+
 -- AddForeignKey
 ALTER TABLE "Ficha" ADD CONSTRAINT "Ficha_personaId_fkey" FOREIGN KEY ("personaId") REFERENCES "Persona"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Consulta" ADD CONSTRAINT "Consulta_fichaId_fkey" FOREIGN KEY ("fichaId") REFERENCES "Ficha"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Galeria" ADD CONSTRAINT "Galeria_personaId_fkey" FOREIGN KEY ("personaId") REFERENCES "Persona"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -9,11 +9,6 @@ interface Store {
   addConsultasAFicha: (consulta: Consulta) => void;
   consultasDeFicha: Consulta[];
   limpiarTodo: ()=> void;
-  /*openPacienteModal: (open: boolean) => void;
-  openConsutltaModal: (open: boolean) => void;
-  isPacienteModal: boolean;
-  isConsutltaModal: boolean;
-  agregarConsultaAFicha: (consulta: Consulta) => void;*/
 }
 
 export const useStore = create<Store>((set, get) => ({
