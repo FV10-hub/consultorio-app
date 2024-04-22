@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+/.next
+/.next-custom
 /.pnp
 .pnp.js
 .yarn/install-state.gz

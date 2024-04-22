@@ -22,9 +22,10 @@ export default function EditPersonaForm({
   const handleSubmit = async (formData: FormData) => {
     var mensaje: string = "";
     if (action === "guardar") {
+      const stringWithCommas = formData.get("documento")?.toString() || "";
       const data = {
         nombre_completo: formData.get("nombre_completo"),
-        documento: formData.get("documento"),
+        documento: stringWithCommas.replace(/,/g, ''),
         email: formData.get("email"),
         esDoctor: formData.get("esDoctor") !== null ? true : false,
         esPaciente: formData.get("esPaciente") !== null ? true : false,

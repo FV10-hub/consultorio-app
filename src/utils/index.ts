@@ -4,11 +4,12 @@ export function getImagePath(imagePath: string) {
     return imagePath;
   }
   if (imagePath.startsWith("public")) {
-    const pathToSaveDB = imagePath.substring(imagePath.indexOf("/images"));
-    return `${pathToSaveDB}`;
-  } else {
-    return imagePath;
+    const startIndex = imagePath.indexOf("images/");
+    const newPath = imagePath.substring(startIndex);
+    return `/${newPath}`;
   }
+  // Ruta relativa de la carpeta public
+  return `/${imagePath}`;
 }
 
 export function formatCurrency(amount: number) {
@@ -26,7 +27,6 @@ export function formatFecha(date: Date): string {
   return `${day}/${month}/${year}`;
 }
 
-
 export function formatMilesSeparador(amount: string) {
-  return new Intl.NumberFormat('en-US').format(+amount);
+  return new Intl.NumberFormat("en-US").format(+amount);
 }
