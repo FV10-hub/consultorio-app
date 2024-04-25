@@ -57,6 +57,6 @@ export async function POST(request: NextRequest) {
     url: filePath.replace(/\\/g, "/"),
   };
 
-  const inserted = createGaleria(galeriaAInsertar);
+  //const inserted = createGaleria(galeriaAInsertar);
   return NextResponse.json({ success: true });
 }

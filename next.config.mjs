@@ -1,14 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   //output:'standalone',
-  /*images: {
+  images: {
     remotePatterns: [
       {
         protocol: "https",
         hostname: "res.cloudinary.com",
       },
     ],
-  },*/
+  },
   /*
   TODO: aca tambien se puede configurar que redireecione al levantar la aplicacion 
   redirects: async () => [

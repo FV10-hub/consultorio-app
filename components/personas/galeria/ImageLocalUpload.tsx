@@ -1,4 +1,5 @@
 "use client";
+import { createGaleria } from "@/actions/personas/galeria/create-galeria-action";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -8,16 +9,12 @@ import { TbPhotoPlus } from "react-icons/tb";
 import { toast } from "react-toastify";
 
 export default function ImageUpload({ id }: { id: string }) {
-
-  
-  
-
   const [file, setFile] = useState<File | undefined>();
   const [descripcion, setDescripcion] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
   useEffect(() => {
-    router.refresh()
+    router.refresh();
   }, []);
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,16 +22,17 @@ export default function ImageUpload({ id }: { id: string }) {
 
     try {
       const data = new FormData();
-      data.set("file", file);
+      data.set("images", file);
       data.set("idPersona", id);
       data.set("descripcion", descripcion!);
 
-      const res = await fetch("/personas/api/upload", {
+      /*const res = await fetch("/personas/api/upload", {
         method: "POST",
         body: data,
-      });
+      });*/
 
-      if (!res.ok) {
+      const inserted = createGaleria(data);
+      if (!inserted) {
         toast.error("No se guardo la imagen");
         return;
       }
@@ -43,7 +41,6 @@ export default function ImageUpload({ id }: { id: string }) {
 
       toast.success("Imagen subida correctamente");
       router.push("/personas");
-      
     } catch (error) {
       console.error(error);
     }
@@ -121,9 +118,11 @@ export default function ImageUpload({ id }: { id: string }) {
             </div>
             <div className="flex justify-center">
               <button
-                className={`${file && descripcion.length > 3 
-                  ? 'bg-orange-500 hover:bg-orange-600 text-white rounded-md w-1/5 mt-5 p-3 uppercase font-bold cursor-pointer' 
-                  : 'bg-gray-300 text-gray-600 rounded-md w-1/5 mt-5 p-3 uppercase font-bold opacity-50 cursor-not-allowed'}`}
+                className={`${
+                  file && descripcion.length > 3
+                    ? "bg-orange-500 hover:bg-orange-600 text-white rounded-md w-1/5 mt-5 p-3 uppercase font-bold cursor-pointer"
+                    : "bg-gray-300 text-gray-600 rounded-md w-1/5 mt-5 p-3 uppercase font-bold opacity-50 cursor-not-allowed"
+                }`}
               >
                 <div className="flex flex-row justify-evenly items-center">
                   Subir <IoCloudUpload />

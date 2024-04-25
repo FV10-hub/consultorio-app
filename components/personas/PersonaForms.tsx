@@ -1,11 +1,9 @@
-import { formatMilesSeparador } from "@/src/utils";
 import { Persona } from "@prisma/client";
 
-
 type PersonaProps = {
-  persona?: Persona
-}
-export default async function PersonaForm({persona}: PersonaProps) {
+  persona?: Persona;
+};
+export default async function PersonaForm({ persona }: PersonaProps) {
   return (
     <>
       <div className="mb-4">
@@ -22,7 +20,7 @@ export default async function PersonaForm({persona}: PersonaProps) {
           autoComplete="off"
           className="block w-full p-3 bg-slate-100"
           placeholder="Nombre Completo"
-          defaultValue={persona?.nombre_completo || ''}
+          defaultValue={persona?.nombre_completo || ""}
         />
       </div>
       <div className="mb-4">
@@ -39,7 +37,24 @@ export default async function PersonaForm({persona}: PersonaProps) {
           autoComplete="off"
           className="block w-full p-3 bg-slate-100"
           placeholder="Documento"
-          defaultValue={formatMilesSeparador(persona?.documento || '') }
+          defaultValue={persona?.documento || ""}
+        />
+      </div>
+      <div className="mb-4">
+        <label
+          htmlFor="telefono"
+          className="block text-gray-700 text-sm font-bold mb-2"
+        >
+          Telefono
+        </label>
+        <input
+          type="text"
+          id="telefono"
+          name="telefono"
+          autoComplete="off"
+          className="block w-full p-3 bg-slate-100"
+          placeholder="telefono"
+          defaultValue={persona?.telefono || ""}
         />
       </div>
       <div className="mb-4">
@@ -56,7 +71,7 @@ export default async function PersonaForm({persona}: PersonaProps) {
           autoComplete="off"
           className="block w-full p-3 bg-slate-100"
           placeholder="Correo"
-          defaultValue={persona?.email || ''}
+          defaultValue={persona?.email || ""}
         />
       </div>
       <div className="mb-4">

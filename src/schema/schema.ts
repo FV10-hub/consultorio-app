@@ -16,6 +16,10 @@ export const PersonaSchema = z.object({
     .string()
     .trim()
     .min(1, { message: "El Documento de la persona no puede ir vacio" }),
+  telefono: z
+    .string()
+    .trim()
+    .min(1, { message: "El Telefono de la persona no puede ir vacio" }),
   email: z
     .string()
     .trim()

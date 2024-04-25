@@ -26,6 +26,7 @@ export default function EditPersonaForm({
       const data = {
         nombre_completo: formData.get("nombre_completo"),
         documento: stringWithCommas.replace(/,/g, ''),
+        telefono: formData.get("telefono"),
         email: formData.get("email"),
         esDoctor: formData.get("esDoctor") !== null ? true : false,
         esPaciente: formData.get("esPaciente") !== null ? true : false,

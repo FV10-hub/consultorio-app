@@ -30,3 +30,13 @@ export function formatFecha(date: Date): string {
 export function formatMilesSeparador(amount: string) {
   return new Intl.NumberFormat("en-US").format(+amount);
 }
+
+export function formatPhoneNumber(numberString: string) {
+  if (numberString.length !== 10) {
+    return "El teléfono debe tener 10 dígitos.";
+  }
+
+  const formatted = `${numberString.slice(0, 4)}-${numberString.slice(4, 7)}-${numberString.slice(7)}`;
+  
+  return formatted;
+}
