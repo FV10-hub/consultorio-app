@@ -8,12 +8,21 @@ export async function createPersona(data: unknown) {
   const result = PersonaSchema.safeParse(data);
   if (!result.success) {
     return {
-      errors: ['No se guardo, ingrese bien los datos'],
+      errors: ["No se guardo, ingrese bien los datos"],
     };
   }
   try {
-    await prisma.persona.create({
-      data: result.data,
+    let personaSaved = await prisma.persona.create({
+      data: { ...result.data, email: "" },
+    });
+    await prisma.ficha.create({
+      data: {
+        tipo_seguro: "NUEVO",
+        personaId: personaSaved.id,
+        consultas: {
+          create: [],
+        },
+      },
     });
     revalidatePath("/personas");
   } catch (error) {
@@ -21,5 +30,4 @@ export async function createPersona(data: unknown) {
       errors: ["No se pudo guardar verifica los datos"],
     };
   }
- 
 }
